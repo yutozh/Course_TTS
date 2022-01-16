@@ -1,0 +1,16 @@
+.idea
+*/__pycache__
+*.pyc
+02_front_end/2-1_word_seg/data/people_daliy_10W
+02_front_end/2-1_word_seg/data/people_daliy_26w
+02_front_end/2-2_g2p/dataset
+02_front_end/2-2_g2p/output
+02_front_end/2-1_word_seg/*.m
+*.rnnlm
+03_spss/16k_copy_synthesis结果
+03_spss/48k_copy_synthesis结果
+03_spss/传统模型合成结果
+03_spss/test_data
+03_spss/train_data
+03_spss/train_data.zip
+bin/*
