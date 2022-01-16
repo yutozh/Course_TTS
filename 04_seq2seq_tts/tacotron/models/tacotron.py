@@ -51,7 +51,8 @@ class TacotronModel(BaseAcousticModel):
             # Encoder module 
             encoder = self.build_encoder()
             encoder_outputs = encoder(inputs=prenet_outputs,
-                                      input_length=self.input_length)
+                                      input_lengths=self.input_length,
+                                      is_training=self.is_training, scope="CBHGNet")
             self.encoder_outputs = tf.identity(
                 encoder_outputs, name='encoder_outputs')
 

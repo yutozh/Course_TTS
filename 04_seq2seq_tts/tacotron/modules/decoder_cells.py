@@ -46,7 +46,7 @@ class BasicTacoDecoderCell(RNNCell):
         self.decoder_rnn_init_state = decoder_rnn_init_state
         self.rnn_auxiliary_feature= rnn_auxiliary_feature
         self.attention_layer_size = self.memory.get_shape()[-1].value
-        self.name_scope = name
+        self.namescope = name
         self.encoder_length = tf.shape(self.memory)[1]
 
         self.get_init_cell_state()
@@ -61,7 +61,7 @@ class BasicTacoDecoderCell(RNNCell):
         
 
     def get_init_cell_state(self):
-        with tf.name_scope(self.name_scope, "CellInit"):
+        with tf.name_scope(self.namescope, "CellInit"):
             if self.decoder_rnn_init_state is None:
                 self.decoder_rnn_init_state = None
             else:

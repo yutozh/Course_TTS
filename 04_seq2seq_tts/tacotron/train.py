@@ -54,6 +54,7 @@ def train(hparams, output_dir, restore_path=""):
     loss_window = ValueWindow(100)
 
     global_saver = tf.train.Saver(tf.global_variables(), max_to_keep=hparams.keep_checkpoint_max)
+    restore_saver = tf.train.Saver(tf.trainable_variables())
 
     log("Model training set to a maximum of {} steps".format(
         hparams.total_training_steps))
@@ -72,6 +73,12 @@ def train(hparams, output_dir, restore_path=""):
             trainreader.start_threads()
 
             sess.run(init_ops)
+
+            # Restore model
+            if restore_path != "":
+                print("Resuming trained model from {}.".format(restore_path))
+                restore_saver.restore(sess, restore_path)
+                global_saver.restore(sess, restore_path)
 
             flops, params = get_graph_stats(sess.graph)
             log("FLOPs: {}".format(flops.total_float_ops))

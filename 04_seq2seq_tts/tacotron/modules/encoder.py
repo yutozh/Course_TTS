@@ -2,13 +2,18 @@ import tensorflow as tf
 from tensorflow.contrib.rnn import GRUCell
 
 class CBHG:
-    def __init__(self, batch_size, K=16, embed_size=128, ):
+    def __init__(self, batch_size, K=16, depth=256):
         self.K = K
-        self.embed_d = embed_size
+        self.depth = depth
         self.batch_size = batch_size
         self.lstm_hidden_size = 64
 
-    def __call__(self, inputs, input_lengths, is_training, scope, K, projections, depth):
+    def __call__(self, inputs, input_lengths, is_training, scope):
+        K = self.K
+        depth = self.depth
+        input_channel = inputs.get_shape()[2]
+        projections = [128, input_channel]
+
         with tf.variable_scope(scope):
             with tf.variable_scope('conv_bank'):
                 # Convolution bank: concatenate on the last axis to stack channels from all convolutions
@@ -52,7 +57,7 @@ class CBHG:
                 dtype=tf.float32)
             return tf.concat(outputs, axis=2)  # Concat forward and backward
 
-    def highwaynet(inputs, scope, depth):
+    def highwaynet(self, inputs, scope, depth):
         with tf.variable_scope(scope):
             H = tf.layers.dense(
                 inputs,
