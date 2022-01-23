@@ -149,7 +149,7 @@ def mask_feature(x, lengths=None, expand_dim=False, mask=None):
     if  (lengths is None) + (mask is None) != 1:
         raise ValueError("Lengths and mask cannot be all None or with value during masking.")
     if lengths is not None:
-            mask = compute_mask(lengths, 1, expand_dim=True)
+        mask = compute_mask(lengths, 1, expand_dim=True)
     if expand_dim:
         mask = tf.expand_dims(mask, axis=-1)
     return x * mask

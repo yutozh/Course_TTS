@@ -67,7 +67,7 @@ class BaseAcousticModel(object):
 
     def build_encoder(self, encoder_auxiliary_feature=None):
         hparams = self.hparams
-        return CBHG(hparams.batch_size, K=16)
+        return CBHG(K=16)
         # return CBHG(hparams.batch_size, K=16, embed_size=hparams.phone_embedding_dim)
         # raise NotImplementedError("Homework: implement the CBHG encoder.")
 
